@@ -1,6 +1,6 @@
 <template>
   <button :id="generateId" @click="func">
-    {{ caption }}
+    {{ operation }}
   </button>
 </template>
 
@@ -8,12 +8,12 @@
 export default {
   name: 'OperationButton',
   props: {
-    caption: String,
+    operation: String,
     func: Function,
   },
   computed: {
     generateId() {
-      return ( this.caption === undefined ) ? undefined : 'calc-operation-' + OP_NAME_MAP[this.caption];
+      return ( this.operation === undefined ) ? undefined : 'calc-operation-' + OP_NAME_MAP[this.operation];
     },
   },
 };
@@ -33,5 +33,8 @@ const OP_NAME_MAP = {
 </script>
 
 <style scoped>
-
+#calc-operation-plus{
+  grid-column: 4;
+  grid-row: 3 / 5;
+}
 </style>
