@@ -31,5 +31,14 @@ const BUTTONS_NAME_MAP = {
 </script>
 
 <style scoped>
+/*#calc-operation-plus {*/
+/*  grid-column: 4;*/
+/*  grid-row: 3 / 5;*/
+/*}*/
 
+
+/*#calc-total {*/
+/*  grid-column: 4;*/
+/*  grid-row: 5 / 7;*/
+/*}*/
 </style>
