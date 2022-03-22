@@ -26,8 +26,8 @@ const BUTTONS_NAME_MAP = {
   'MR': 'memory-recall',
   'M+': 'memory-add',
   'C/CE': 'clear',
-
 };
+
 </script>
 
 <style scoped>

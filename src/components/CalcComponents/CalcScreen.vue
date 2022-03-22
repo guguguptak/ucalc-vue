@@ -31,6 +31,7 @@ const patch = {
 
 calcStore2.$patch( patch );
 */
+// CalcController.MemoryView();
 </script>
 
 <style scoped>

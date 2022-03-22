@@ -6,10 +6,10 @@
       <CalcButton caption="=" style="grid-column: 4; grid-row: 5 / 7;" :func="$log('dupa')" />
       <NumericButton v-for="buttonNr in buttonOrder" :key="buttonNr" :number="buttonNr" />
       <CalcButton caption="." style="grid-column: 1; grid-row: 7 " :func="$log('dupa')" />
-      <CalcButton caption="±" :func="$log('dupa')" />
-      <CalcButton caption="C/CE" :func="$log('dupa')" />
-      <CalcButton caption="MS" style="grid-column: 3; grid-row:2" :func="$log('dupa')" />
-      <CalcButton caption="MC" style="grid-column: 1; grid-row: 2;" :func="$log('dupa')" />
+      <CalcButton caption="±" :func="signPressed" />
+      <CalcButton caption="C/CE" :func="calcClearPressed"/>
+      <CalcButton caption="MS" style="grid-column: 3; grid-row: 2" :func="memoryStorePressed" />
+      <CalcButton caption="MC" style="grid-column: 1; grid-row: 2" :func="$log('dupa')" />
       <CalcButton caption="MR" style="grid-column: 2; grid-row: 2" :func="$log('dupa')" />
       <CalcButton caption="M+" style="grid-column: 4; grid-row: 2" :func="$log('dupa')" />
     </div>
@@ -21,16 +21,32 @@ import CalcScreen from './CalcScreen.vue';
 import CalcButton from './CalcButton.vue';
 import OperationButton from './OperationButton.vue';
 import NumericButton from './NumericButton.vue';
+import { CalcController } from '../../controller/controller.ts';
+import { mapState } from 'pinia';
+import { calcStore } from '../../stores/calcStore.ts';
 
 export default {
   name: 'CalcComponent',
   components: { CalcScreen, NumericButton, OperationButton, CalcButton },
-  data: () => ({
+  ...mapState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
+  data: () => ( {
     buttonOrder: [7, 8, 9, 4, 5, 6, 1, 2, 3, 0],
-    calcOperations:['/', '*', '-', '+'],
-  }),
-}
-;
+    calcOperations: ['/', '*', '-', '+'],
+  } ),
+  methods: {
+    signPressed() {
+      return CalcController.signPressed();
+    },
+    memoryStorePressed(){
+      return CalcController.signPressed();
+    },
+    calcClearPressed() {
+      return CalcController.calcClearPressed();
+    }
+  },
+
+
+};
 </script>
 
 <style scoped>
@@ -42,6 +58,7 @@ main {
   font-size: 20px;
   font-family: Calibri, sans-serif;
 }
+
 .calc-grid {
   background: #eee;
   padding: 0.25rem;
@@ -56,6 +73,7 @@ main {
   align-items: center;
   height: 100%;
 }
+
 button {
   padding: 0.2rem 0;
 }
