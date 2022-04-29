@@ -7,7 +7,7 @@ export const calcStore = defineStore({
 
 export const initialState = {
   result: 0,
-  subtotal: null,
+  subtotal:null,
   lastOp: null,
   opWasLast: false,
   dotPosition: null,

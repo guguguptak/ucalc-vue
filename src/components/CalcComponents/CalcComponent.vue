@@ -2,16 +2,16 @@
   <main class="main">
     <div class="calc-grid">
       <CalcScreen />
-      <OperationButton v-for="operation in calcOperations" :key="operation" :operation="operation" />
+      <OperationButton v-for="operation in calcOperations" :key="operation" :operation="operation" :func="calcOperationPressed"  />
       <CalcButton caption="=" style="grid-column: 4; grid-row: 5 / 7;" :func="$log('dupa')" />
       <NumericButton v-for="buttonNr in buttonOrder" :key="buttonNr" :number="buttonNr" />
-      <CalcButton caption="." style="grid-column: 1; grid-row: 7 " :func="$log('dupa')" />
+      <CalcButton caption="." style="grid-column: 1; grid-row: 7 " :func="dotPressed" />
       <CalcButton caption="±" :func="signPressed" />
       <CalcButton caption="C/CE" :func="calcClearPressed"/>
       <CalcButton caption="MS" style="grid-column: 3; grid-row: 2" :func="memoryStorePressed" />
-      <CalcButton caption="MC" style="grid-column: 1; grid-row: 2" :func="$log('dupa')" />
-      <CalcButton caption="MR" style="grid-column: 2; grid-row: 2" :func="$log('dupa')" />
-      <CalcButton caption="M+" style="grid-column: 4; grid-row: 2" :func="$log('dupa')" />
+      <CalcButton caption="MC" style="grid-column: 1; grid-row: 2" :func="memoryClearPressed" />
+      <CalcButton caption="MR" style="grid-column: 2; grid-row: 2" :func="memoryRecallPressed" />
+      <CalcButton caption="M+" style="grid-column: 4; grid-row: 2" :func="memoryAddPressed" />
     </div>
   </main>
 </template>
@@ -34,15 +34,36 @@ export default {
     calcOperations: ['/', '*', '-', '+'],
   } ),
   methods: {
+    // numberPressed(){
+    //   return CalcController.numberPressed()
+    // },
     signPressed() {
       return CalcController.signPressed();
     },
     memoryStorePressed(){
-      return CalcController.signPressed();
+      return CalcController.memoryStorePressed();
+    },
+    memoryRecallPressed(){
+      return CalcController.memoryRecallPressed();
+    },
+    memoryAddPressed(){
+      return CalcController.memoryAddPressed();
+    },
+    memoryClearPressed(){
+      return CalcController.memoryClearPressed();
     },
     calcClearPressed() {
       return CalcController.calcClearPressed();
-    }
+    },
+    dotPressed() {
+      return CalcController.dotPressed();
+    },
+    // handleNumberPressed(buttonNumber) {
+    //   return CalcController.handleNumberPressed(this.number);
+    // },
+    // calcOperationPressed() {
+    //   return CalcController.calcOperationPressed();
+    // },
   },
 
 

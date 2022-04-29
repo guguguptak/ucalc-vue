@@ -7,12 +7,17 @@
 <script>
 import { mapWritableState } from 'pinia';
 import { calcStore } from '../../stores/calcStore.ts';
+import {
+  CalcController,
+  PRECISION_MAX,
+} from '../../controller/controller';
 
 export default {
   name: 'NumericButton',
 
   props: {
     number: Number,
+    func: Function,
   },
   computed: {
     generatedId() {
@@ -20,12 +25,15 @@ export default {
     },
     ...mapWritableState( calcStore, ['result'] ),
   },
-  methods: {
-    numberPressed() {
-      this.result = this.result * 10 + this.number;
-    },
-  },
-};
+methods:{
+    numberPressed(){
+      return CalcController.numberPressed(this.number)
+    }
+  // numberPressed() {
+  //   this.result = this.result * 10 + this.number;
+  // },
+},
+}
 </script>
 
 <style scoped>
