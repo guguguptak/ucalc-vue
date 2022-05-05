@@ -1,10 +1,12 @@
 <template>
-  <button :id="generateId" @click="func">
+  <button :id="generateId" @click="calcOperationPressed">
     {{ operation }}
   </button>
 </template>
 
 <script>
+import { CalcController } from '../../controller/controller';
+
 export default {
   name: 'OperationButton',
   props: {
@@ -16,6 +18,11 @@ export default {
       return ( this.operation === undefined ) ? undefined : 'calc-operation-' + OP_NAME_MAP[this.operation];
     },
   },
+  methods:{
+    calcOperationPressed(){
+      return CalcController.calcOperationPressed(this.operation)
+    }
+  }
 };
 const OP_NAME_MAP = {
   '+': 'plus',

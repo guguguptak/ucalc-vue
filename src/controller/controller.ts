@@ -1,38 +1,20 @@
 import { calcStore } from '@/stores/calcStore';
 
-// export const CalcController = {
-//   id: 'CalcController',
-//   methods: {
-//     signPressed() {
-//       const calcStore2 = calcStore();
-//       // CalcController.stopRepeat();
-//       const patch = {
-//         result: calcStore().result *= -1,
-//       };
-//       calcStore2.$patch(patch);
-//     },
-//   },
-// };
 export const PRECISION_MAX = 10;
 // const MIN_NON_EXPONENTIAL = Math.pow(10, -PRECISION_MAX);
 // const MAX_NON_EXPONENTIAL = Math.pow(10, PRECISION_MAX);
 // const JS_DUMB_TOSTRING_EXP_THRESHOLD = 1E-6;
 
 export class CalcController {
-  // static MemoryView() {
-  //   const calcStore2 = calcStore();
-  //   const patch = {
-  //     memory: 'dupa',
-  //   };
-  //   calcStore2.$patch(patch);
+
+  // static numberPressed(buttonNr) {
+  //   const storeState = calcStore();
+  //   let storePatch = { result: buttonNr };
+  //   storePatch.result = storeState.result * 10 + buttonNr;
+  //   storeState.$patch(storePatch);
   // };
-  static numberPressed(buttonNr) {
-    const storeState = calcStore();
-    let storePatch = { result: buttonNr };
-    storePatch.result = storeState.result * 10 + buttonNr;
-    storeState.$patch(storePatch);
-  };
-  static numberHandlePressed(buttonNumber) {
+
+  static numberPressed(buttonNumber) {
     // CalcController.stopRepeat();
 
     const storeState = calcStore();
@@ -52,7 +34,7 @@ export class CalcController {
           storeState.dotPosition++;
           storePatch.dotPosition = storeState.dotPosition;
           // newState = { state: state.dotPosition++, }; //TODO:why?? (both versions are worked but why?)
-          // newState.result = parseFloat( buttonNumber.toPrecision( PRECISION_MAX ) );
+          storePatch.result = parseFloat(buttonNumber.toPrecision(PRECISION_MAX));
           if (buttonNumber === 0) {
             storePatch.fakeZeroes++;
             CalcController.updateResult();
@@ -80,8 +62,9 @@ export class CalcController {
   static doOperation() {
     const storeState = calcStore();
     let newResult = storeState.subtotal;
+
     switch (storeState.lastOp) {
-      case '+' :
+      case '+':
         newResult += storeState.result;
         break;
       case '-':
@@ -97,6 +80,7 @@ export class CalcController {
         break;
       default:
         throw new Error('invalid operation');
+
     }
     const storePatch = {
       result: newResult,
@@ -105,26 +89,24 @@ export class CalcController {
       dotPosition: null,
       fakeZeroes: 0,
     };
-    storeState.$patch(storePatch);
-    // return storePatch;
+    return storePatch;
   }
 
-  // static calcOperationPressed(op) {
-  //   const storeState = calcStore();
-  //   const storePatch = storeState.opWasLast ?
-  //     {
-  //       lastOp: op,
-  //       opWasLast: true,
-  //       dotPosition: null,
-  //     } : CalcController.doOperation();
-  //   // TODO problems with expected values after operation (calcOperationPressed)
-  //   // newState.subtotal = null;
-  //   //newState.repeatValue = state.result;
-  //   if (storeState.repeatValue === null) {
-  //     newState.subtotal = storeState.result;
-  //   }
-  //   storeState.$patch(storePatch);
-  // }
+  static calcOperationPressed(op) {
+    const storeState = calcStore();
+    const storePatch = storeState.opWasLast ?
+      {} : CalcController.doOperation();
+    storePatch.lastOp = op;
+    storePatch.opWasLast = true;
+    storePatch.dotPosition = null;
+    // TODO problems with expected values after operation (calcOperationPressed)
+    // storePatch.subtotal = null;
+    // storePatch.repeatValue = storeState.result;
+    if (storeState.repeatValue === null) {
+      storePatch.subtotal = storeState.result;
+    }
+    storeState.$patch(storePatch);
+  }
 
   static memoryStorePressed() {
     const storeState = calcStore();
@@ -165,7 +147,7 @@ export class CalcController {
         dotPosition: 0,
       };
       storeState.$patch(storePatch);
-    }else{
+    } else {
       let storePatch = {
         dotPosition: null,
       };
@@ -180,9 +162,37 @@ export class CalcController {
         result: 0,
       };
       storeState.$patch(storePatch);
+      //if ( state.result === 0 )
+      //   store.dispatch( {
+      //         type: SET_STATE_ACTION,
+      //         newState: {
+      //           subtotal: null,
+      //           lastOp: null,
+      //         },
+      //       } );
+      //     } else {
+      //       store.dispatch( {
+      //         type: SET_STATE_ACTION,
+      //         newState: {
+      //           result: 0,
+      //           dotPosition: null,
+      //         },
+      //       } );
+      //       if ( state.subtotal === null ) {
+      //         store.dispatch( {
+      //           type: SET_STATE_ACTION,
+      //           newState: {
+      //             lastOp: null,
+      //             fakeZeroes: 0,
+      //             dotPosition: null,
+      //           },
+      //         } )
+      //         ;
+      //       }
+      //     }
     }
     ;
   }
 
-  //TODO:rest of it
+//TODO:rest of it
 }

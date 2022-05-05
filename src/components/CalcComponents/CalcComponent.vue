@@ -2,7 +2,7 @@
   <main class="main">
     <div class="calc-grid">
       <CalcScreen />
-      <OperationButton v-for="operation in calcOperations" :key="operation" :operation="operation" :func="calcOperationPressed"  />
+      <OperationButton v-for="operation in calcOperations" :key="operation" :operation="operation"  />
       <CalcButton caption="=" style="grid-column: 4; grid-row: 5 / 7;" :func="$log('dupa')" />
       <NumericButton v-for="buttonNr in buttonOrder" :key="buttonNr" :number="buttonNr" />
       <CalcButton caption="." style="grid-column: 1; grid-row: 7 " :func="dotPressed" />

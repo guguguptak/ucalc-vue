@@ -7,7 +7,7 @@
       <div id="memory">
         {{ memory ? 'M' : '' }}
       </div>
-      <input id="result" maxlength="13" type="text" readonly :value="result ? result : 0" />
+      <input id="result" maxlength="13" type="text" readonly :value='result ? result : 0' />
 
     </div>
   </div>
@@ -15,23 +15,18 @@
 
 <script>
 import { calcStore } from '../../stores/calcStore.ts';
-import { mapState } from 'pinia';
+import {
+  mapState,
+  mapWritableState,
+} from 'pinia';
 
 export default {
   name: 'CalcScreen',
   computed: {
     ...mapState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
+    // ...mapWritableState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
   },
 };
-/*
-const calcStore2 = calcStore();
-const patch = {
-  memory: 'dupa',
-};
-
-calcStore2.$patch( patch );
-*/
-// CalcController.MemoryView();
 </script>
 
 <style scoped>

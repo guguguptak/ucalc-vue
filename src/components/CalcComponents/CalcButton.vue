@@ -5,6 +5,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'CalcButton',
   props: {
@@ -16,6 +17,15 @@ export default {
       return ( this.caption === undefined ) ? undefined : 'calc-' + BUTTONS_NAME_MAP[this.caption];
     },
   },
+
+  // methods: {
+  //   signPressed() {
+  //     const calcStore2 = calcStore();
+  //     // CalcController.stopRepeat();
+  //     let patch = calcStore2.result*= -1;
+  //     calcStore2.$patch( patch );
+  //   },
+  // },
 };
 const BUTTONS_NAME_MAP = {
   '=': 'total',
