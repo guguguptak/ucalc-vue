@@ -16,15 +16,15 @@
 <script>
 import { calcStore } from '../../stores/calcStore.ts';
 import {
-  mapState,
-  mapWritableState,
+  // mapState,
+   mapWritableState,
 } from 'pinia';
 
 export default {
   name: 'CalcScreen',
   computed: {
-    ...mapState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
-    // ...mapWritableState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
+    // ...mapState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
+    ...mapWritableState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
   },
 };
 </script>

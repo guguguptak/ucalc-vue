@@ -22,13 +22,17 @@ import CalcButton from './CalcButton.vue';
 import OperationButton from './OperationButton.vue';
 import NumericButton from './NumericButton.vue';
 import { CalcController } from '../../controller/controller.ts';
-import { mapState } from 'pinia';
+import {
+  mapState,
+  mapWritableState,
+} from 'pinia';
 import { calcStore } from '../../stores/calcStore.ts';
 
 export default {
   name: 'CalcComponent',
   components: { CalcScreen, NumericButton, OperationButton, CalcButton },
-  ...mapState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
+  ...mapWritableState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
+  // ...mapState( calcStore, ['subtotal', 'lastOp', 'result', 'memory'] ),
   data: () => ( {
     buttonOrder: [7, 8, 9, 4, 5, 6, 1, 2, 3, 0],
     calcOperations: ['/', '*', '-', '+'],
@@ -77,9 +81,10 @@ main {
 .calc-grid {
   background: #eee;
   padding: 0.25rem;
-  border: 2px #ddd groove;
+  border: 3px #ddd groove;
   display: inline-grid;
   grid-gap: 0.5rem;
+  border-radius: 2px;
 }
 
 .main {
