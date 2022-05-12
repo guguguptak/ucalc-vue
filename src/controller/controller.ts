@@ -100,7 +100,7 @@ export class CalcController {
     storePatch.opWasLast = true;
     storePatch.dotPosition = null;
     // TODO problems with expected values after operation (calcOperationPressed)
-    // storePatch.subtotal = null;
+    storePatch.subtotal = null;
     // storePatch.repeatValue = storeState.result;
     if (storeState.repeatValue === null) {
       storePatch.subtotal = storeState.result;
@@ -132,7 +132,7 @@ export class CalcController {
 
   static memoryClearPressed() {
     const storeState = calcStore();
-    let storePatch = { memory: null };
+    const storePatch = { memory: null };
     storeState.$patch(storePatch);
   }
 
@@ -143,12 +143,12 @@ export class CalcController {
       return;
     }
     if (storeState.dotPosition === null) {
-      let storePatch = {
+      const storePatch = {
         dotPosition: 0,
       };
       storeState.$patch(storePatch);
     } else {
-      let storePatch = {
+      const storePatch = {
         dotPosition: null,
       };
       storeState.$patch(storePatch);
@@ -157,42 +157,26 @@ export class CalcController {
 
   static calcClearPressed() {
     const storeState = calcStore();
-    if (storeState.result !== 0) {
+    if (storeState.result === 0) {
       const storePatch = {
-        result: 0,
+        subtotal: null,
+        lastOp: null,
       };
       storeState.$patch(storePatch);
-      //if ( state.result === 0 )
-      //   store.dispatch( {
-      //         type: SET_STATE_ACTION,
-      //         newState: {
-      //           subtotal: null,
-      //           lastOp: null,
-      //         },
-      //       } );
-      //     } else {
-      //       store.dispatch( {
-      //         type: SET_STATE_ACTION,
-      //         newState: {
-      //           result: 0,
-      //           dotPosition: null,
-      //         },
-      //       } );
-      //       if ( state.subtotal === null ) {
-      //         store.dispatch( {
-      //           type: SET_STATE_ACTION,
-      //           newState: {
-      //             lastOp: null,
-      //             fakeZeroes: 0,
-      //             dotPosition: null,
-      //           },
-      //         } )
-      //         ;
-      //       }
-      //     }
+    } else {
+      const storePatch = {
+        result: 0,
+        dotPosition: null,
+      };
+      storeState.$patch(storePatch);
     }
-    ;
-  }
-
-//TODO:rest of it
-}
+    if (storeState.subtotal === null) {
+      const storePatch = {
+        lastOp: null,
+        fakeZeroes: 0,
+        dotPosition: null,
+      };
+      storeState.$patch(storePatch);
+    }
+  };
+};
