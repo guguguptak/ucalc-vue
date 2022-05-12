@@ -7,15 +7,8 @@ export const PRECISION_MAX = 10;
 
 export class CalcController {
 
-  // static numberPressed(buttonNr) {
-  //   const storeState = calcStore();
-  //   let storePatch = { result: buttonNr };
-  //   storePatch.result = storeState.result * 10 + buttonNr;
-  //   storeState.$patch(storePatch);
-  // };
-
   static numberPressed(buttonNumber) {
-    // CalcController.stopRepeat();
+    CalcController.stopRepeat();
 
     const storeState = calcStore();
     let storePatch = { result: buttonNumber };
@@ -42,8 +35,6 @@ export class CalcController {
             storePatch.fakeZeroes = 0;
             storePatch.result = storeState.result + buttonNumber / Math.pow(10, storeState.dotPosition);
           }
-          //     // TODO <-if it's necessary something else this one line above
-          // }
         }
       }
     }
@@ -54,8 +45,8 @@ export class CalcController {
 
   static signPressed() {
     const storeState = calcStore();
-    // CalcController.stopRepeat();
-    const storePatch = storeState.result *= -1;
+    CalcController.stopRepeat();
+    const storePatch = (storeState.result *= -1);
     storeState.$patch(storePatch);
   }
 
@@ -99,12 +90,20 @@ export class CalcController {
     storePatch.lastOp = op;
     storePatch.opWasLast = true;
     storePatch.dotPosition = null;
-    // TODO problems with expected values after operation (calcOperationPressed)
     storePatch.subtotal = null;
-    // storePatch.repeatValue = storeState.result;
     if (storeState.repeatValue === null) {
       storePatch.subtotal = storeState.result;
     }
+    storeState.$patch(storePatch);
+  }
+
+  static stopRepeat() {
+    const storeState = calcStore();
+    const storePatch = {};
+    if (storeState.subtotal === null) {
+      storePatch.lastOp = null;
+    }
+    storePatch.repeatValue = null;
     storeState.$patch(storePatch);
   }
 
@@ -117,14 +116,14 @@ export class CalcController {
   static memoryRecallPressed() {
     const storeState = calcStore();
     if (storeState.memory !== null) {
-      let storePatch = { result: storeState.memory };
+      const storePatch = { result: storeState.memory };
       storeState.$patch(storePatch);
     }
   }
 
   static memoryAddPressed() {
     const storeState = calcStore();
-    let storePatch = {
+    const storePatch = {
       memory: storeState.memory + storeState.result,
     };
     storeState.$patch(storePatch);
@@ -138,7 +137,7 @@ export class CalcController {
 
   static dotPressed() {
     const storeState = calcStore();
-    // CalcController.stopRepeat();
+    CalcController.stopRepeat();
     if (storeState.opWasLast) {
       return;
     }
@@ -178,5 +177,11 @@ export class CalcController {
       };
       storeState.$patch(storePatch);
     }
+    CalcController.stopRepeat();
+    const storePatch = {
+      fakeZeroes: 0,
+      dotPosition: null,
+    };
+    storeState.$patch(storePatch);
   };
-};
+}
