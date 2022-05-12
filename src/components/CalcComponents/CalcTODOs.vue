@@ -5,10 +5,10 @@
       <ol class="list">
         <li class="li">fix bugs</li>
         <ul>
-          <li>repeatAction function (after press total button should be possible to do the last operation again)</li>
+          <li>after press total button should be possible to do the last operation again</li>
           <li>problem with rounding numbers</li>
-          <li>problem with additional operation after press total (now you can e.g add or divide something to the last
-            result
+          <li>problem with additional operation after press total (now you can't e.g add or divide something to the last
+            result)
           </li>
         </ul>
         <li class="li">features</li>
