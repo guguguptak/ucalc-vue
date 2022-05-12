@@ -96,11 +96,12 @@ export class CalcController {
     }
     storeState.$patch(storePatch);
   }
+
   static calcTotalPressed(op) {
     const storeState = calcStore();
     const storePatch = {};
-    if ( storeState.repeatValue === null ) {
-      if ( storeState.subtotal === null ) {
+    if (storeState.repeatValue === null) {
+      if (storeState.subtotal === null) {
         return;
       }
       storePatch.repeatValue = storeState.result;
