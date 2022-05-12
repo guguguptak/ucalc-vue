@@ -96,6 +96,27 @@ export class CalcController {
     }
     storeState.$patch(storePatch);
   }
+  static calcTotalPressed(op) {
+    const storeState = calcStore();
+    const storePatch = {};
+    if ( storeState.repeatValue === null ) {
+      if ( storeState.subtotal === null ) {
+        return;
+      }
+      storePatch.repeatValue = storeState.result;
+      CalcController.calcOperationPressed(op);
+      storePatch.subtotal = null;
+      // newState.opWasLast = null;
+      // newState.lastOp = op;
+
+    } else {
+      storePatch.subtotal = storeState.result;
+      storePatch.result = storeState.repeatValue;
+      CalcController.calcOperationPressed(op);
+      storePatch.subtotal = null;
+    }
+    storeState.$patch(storePatch);
+  }
 
   static stopRepeat() {
     const storeState = calcStore();

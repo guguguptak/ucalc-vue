@@ -3,7 +3,7 @@
     <div class="calc-grid">
       <CalcScreen />
       <OperationButton v-for="operation in calcOperations" :key="operation" :operation="operation"  />
-      <CalcButton caption="=" style="grid-column: 4; grid-row: 5 / 7;" :func="$log('dupa')" />
+      <CalcButton caption="=" style="grid-column: 4; grid-row: 5 / 7;" :func="calcTotalPressed" />
       <NumericButton v-for="buttonNr in buttonOrder" :key="buttonNr" :number="buttonNr" />
       <CalcButton caption="." style="grid-column: 1; grid-row: 7 " :func="dotPressed" />
       <CalcButton caption="±" :func="signPressed" />
@@ -34,9 +34,9 @@ export default {
     calcOperations: ['/', '*', '-', '+'],
   } ),
   methods: {
-    // numberPressed(){
-    //   return CalcController.numberPressed()
-    // },
+    calcTotalPressed(){
+      return CalcController.calcTotalPressed()
+    },
     signPressed() {
       return CalcController.signPressed();
     },
@@ -58,12 +58,6 @@ export default {
     dotPressed() {
       return CalcController.dotPressed();
     },
-    // handleNumberPressed(buttonNumber) {
-    //   return CalcController.handleNumberPressed(this.number);
-    // },
-    // calcOperationPressed() {
-    //   return CalcController.calcOperationPressed();
-    // },
   },
 
 
