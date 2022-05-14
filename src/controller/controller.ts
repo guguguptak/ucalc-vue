@@ -1,10 +1,6 @@
 import { calcStore } from '@/stores/calcStore';
 
 export const PRECISION_MAX = 10;
-// const MIN_NON_EXPONENTIAL = Math.pow(10, -PRECISION_MAX);
-// const MAX_NON_EXPONENTIAL = Math.pow(10, PRECISION_MAX);
-// const JS_DUMB_TOSTRING_EXP_THRESHOLD = 1E-6;
-
 export class CalcController {
 
   static numberPressed(buttonNumber) {
@@ -22,7 +18,7 @@ export class CalcController {
       if (storeState.dotPosition === null) {
         storePatch.fakeZeroes = 0;
         storePatch.result = storeState.result * 10 + buttonNumber;
-      } else {//TODO dotPosition;;
+      } else {
         if (storeState.dotPosition < PRECISION_MAX) {
           storeState.dotPosition++;
           storePatch.dotPosition = storeState.dotPosition;
