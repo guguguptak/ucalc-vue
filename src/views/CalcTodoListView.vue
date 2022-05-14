@@ -5,7 +5,7 @@
 <script>
 import CalcTodos from '../components/CalcComponents/CalcTodos.vue';
 export default {
-  name: 'CalcTODosView',
+  name: 'CalcTodosView',
   components: { CalcTodos },
 };
 </script>

@@ -7,7 +7,7 @@
         <ul>
           <li><kbd>=</kbd> should repeat last operation</li>
           <li>add rounding (to handle IEEE floats)</li>
-          <li>next operation after pressing total doesn't allow e.g  adding to the last result
+          <li>next operation after pressing total doesn't allow e.g adding to the last result
           </li>
         </ul>
         <li class="li">features</li>
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'CalcTODOs',
+  name: 'CalcTodos',
 };
 </script>
 
@@ -31,7 +31,8 @@ ul {
   list-style-type: circle;
   padding: 0.3rem 0 0.3rem 0;
 }
-li{
+
+li {
   padding: 0.3rem 0 0.3rem 0;
 }
 
