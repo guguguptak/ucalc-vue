@@ -8,13 +8,12 @@ import HelloWorld from '@/components/HelloWorld.vue';
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/calc">Calculator</RouterLink>
-        <RouterLink to="/todo">CalculatorTODOs</RouterLink>
+        <RouterLink to="/">Calculator</RouterLink>
+        <RouterLink to="/todo">Calculator TODOs</RouterLink>
+        <RouterLink to="/aboutVue3">About Vue 3</RouterLink>
       </nav>
     </div>
   </header>

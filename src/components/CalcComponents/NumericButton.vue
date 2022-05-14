@@ -29,9 +29,6 @@ methods:{
     numberPressed(){
       return CalcController.numberPressed(this.number)
     }
-  // numberPressed() {
-  //   this.result = this.result * 10 + this.number;
-  // },
 },
 }
 </script>

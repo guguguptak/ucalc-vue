@@ -30,13 +30,7 @@ const OP_NAME_MAP = {
   '*': 'times',
   '/': 'divide',
 };
-// const OP_NAME_MAP = {
-//     'plus': '+',
-//     'minus': '-',
-//     'times': '*',
-//     'divide': ' / ',
-//   }
-;
+
 </script>
 
 <style scoped>

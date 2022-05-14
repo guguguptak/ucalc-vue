@@ -17,15 +17,6 @@ export default {
       return ( this.caption === undefined ) ? undefined : 'calc-' + BUTTONS_NAME_MAP[this.caption];
     },
   },
-
-  // methods: {
-  //   signPressed() {
-  //     const calcStore2 = calcStore();
-  //     // CalcController.stopRepeat();
-  //     let patch = calcStore2.result*= -1;
-  //     calcStore2.$patch( patch );
-  //   },
-  // },
 };
 const BUTTONS_NAME_MAP = {
   '=': 'total',
@@ -41,8 +32,4 @@ const BUTTONS_NAME_MAP = {
 </script>
 
 <style scoped>
-/*#calc-total {*/
-/*  grid-column: 4;*/
-/*  grid-row: 5 / 7;*/
-/*}*/
 </style>
